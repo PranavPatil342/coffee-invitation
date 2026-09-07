@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case File: A Special Invitation ☕</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Dancing+Script:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{
+  --ink:#2f2026; --muted:#75666a; --cream:#fbf6ef; --paper:#fffdf9;
+  --rose:#b85f5b; --rose-dark:#8f4544; --terracotta:#c98262; --gold:#c89557;
+  --line:rgba(62,40,47,.12); --soft:rgba(255,255,255,.72);
+  --shadow:0 24px 70px rgba(63,38,43,.12); --shadow-sm:0 10px 30px rgba(63,38,43,.10);
+  --font-display:'Cormorant Garamond',serif; --font-script:'Dancing Script',cursive; --font-body:'DM Sans',sans-serif;
+  --radius:28px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:
+ radial-gradient(circle at 10% 0%,rgba(214,166,126,.16),transparent 30%),
+ radial-gradient(circle at 92% 18%,rgba(184,95,91,.10),transparent 28%),
+ var(--cream);color:var(--ink);font-family:var(--font-body);overflow-x:hidden}
+button,input{font:inherit}
+button{border:0}
+.hearts-bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.heart{position:absolute;bottom:-60px;color:var(--rose);animation:floatHeart linear infinite;pointer-events:none}
+@keyframes floatHeart{from{transform:translateY(0) rotate(0deg);opacity:0}12%{opacity:.12}to{transform:translateY(-115vh) rotate(18deg);opacity:0}}
+.confetti-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:100}
+#roseContainer{position:fixed;inset:0;pointer-events:none;z-index:90}
+.rose{position:absolute;animation:roseFall 4s ease-in forwards;opacity:.9}
+@keyframes roseFall{from{transform:translateY(-60px) rotate(0)}to{transform:translateY(110vh) rotate(420deg);opacity:0}}
+.app{position:relative;z-index:2;width:min(1120px,calc(100% - 32px));margin:0 auto;padding:28px 0 48px}
+.progress-tracker{display:flex;align-items:center;justify-content:space-between;margin:0 auto 22px;width:min(760px,100%);padding:0 6px}
+.progress-steps{display:flex;align-items:center;gap:8px}
+.progress-step{width:42px;height:5px;border-radius:99px;background:rgba(90,62,69,.12);transition:.35s ease}
+.progress-step.active{background:var(--rose)}
+.progress-label{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.progress-label span{color:var(--rose)}
+.phase{display:none;animation:phaseIn .55s ease both}
+.phase.active{display:block}
+@keyframes phaseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.font-display{font-family:var(--font-display)}
+.font-display-light{font-family:var(--font-script)}
+.heading-xl{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,7.1rem);line-height:.82;letter-spacing:-.045em;margin:14px 0 22px;font-weight:600}
+.heading-md{font-size:clamp(2.3rem,5vw,4rem);line-height:.9;margin:8px 0 18px;font-weight:600}
+.highlight{color:var(--rose)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid rgba(184,95,91,.22);border-radius:99px;background:rgba(255,255,255,.58);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--rose-dark)}
+/* WELCOME */
+.welcome-hero{position:relative;min-height:690px;background:rgba(255,253,249,.76);border:1px solid rgba(70,45,50,.08);border-radius:38px;box-shadow:var(--shadow);overflow:hidden;padding:clamp(34px,6vw,74px)}
+.welcome-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,.62),transparent 58%);pointer-events:none}
+.welcome-copy{position:relative;z-index:3;width:54%;max-width:590px}
+.emoji-big{display:block;font-size:2.2rem;margin-top:24px;filter:grayscale(.15)}
+.greeting-name{font-size:clamp(1.7rem,3vw,2.5rem);color:#3f2c32}
+.greeting-sub{margin-top:2px;color:var(--muted);font-size:.95rem}
+.case-bubble{margin-top:28px;padding:24px 26px;border-left:3px solid var(--terracotta);background:rgba(255,255,255,.65);border-radius:0 20px 20px 0;box-shadow:0 10px 25px rgba(68,44,49,.06);font-size:.92rem;line-height:1.78;color:#4a3b40}
+.case-bubble p{margin:0 0 12px}.case-bubble p:last-child{margin-bottom:0;color:var(--rose-dark)!important}
+.quote{font-family:var(--font-script);font-size:1.18em;color:var(--rose-dark)}
+.hero-art{position:absolute;right:-34px;top:36px;width:49%;height:610px;z-index:1}
+.hero-art .glow{position:absolute;width:440px;height:440px;right:15px;top:35px;border-radius:50%;background:radial-gradient(circle,rgba(201,149,87,.22),rgba(201,149,87,0) 68%)}
+.polaroid{position:absolute;right:56px;top:50px;width:min(390px,78%);padding:15px 15px 52px;background:#fffefa;box-shadow:0 24px 55px rgba(56,34,40,.20);transform:rotate(5deg);border-radius:3px}
+.polaroid:before{content:"";position:absolute;top:-17px;left:50%;width:105px;height:33px;background:rgba(224,155,137,.55);transform:translateX(-50%) rotate(-2deg)}
+.photo{height:350px;position:relative;overflow:hidden;background:linear-gradient(145deg,#ead7c5,#c98970);border-radius:2px}
+.photo:before{content:"";position:absolute;width:180px;height:180px;left:50%;top:44%;transform:translate(-50%,-50%);border-radius:50%;background:#dfc3a6;box-shadow:0 24px 30px rgba(65,42,41,.16)}
+.cup{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:145px;height:94px;border-radius:18px 18px 38px 38px;background:linear-gradient(#c87b6f,#a95755);box-shadow:0 14px 22px rgba(70,42,44,.2)}
+.cup:before{content:"";position:absolute;left:50%;top:10px;transform:translateX(-50%);width:104px;height:29px;border-radius:50%;background:#3e2529;box-shadow:inset 0 0 0 8px #b8756d}
+.cup:after{content:"";position:absolute;right:-35px;top:20px;width:44px;height:44px;border:9px solid #b86661;border-left:0;border-radius:0 28px 28px 0}
+.saucer{position:absolute;left:50%;top:61%;transform:translateX(-50%);width:230px;height:52px;border-radius:50%;background:rgba(255,247,237,.82);box-shadow:0 9px 18px rgba(66,44,45,.12)}
+.steam-line{position:absolute;top:58px;width:3px;height:65px;border-radius:9px;background:rgba(255,255,255,.46);filter:blur(1px);animation:steam 2.7s ease-in-out infinite}
+.steam-line.one{left:46%}.steam-line.two{left:54%;height:52px;animation-delay:.7s}.steam-line.three{left:59%;height:43px;animation-delay:1.3s}
+@keyframes steam{50%{transform:translateY(-14px);opacity:.12}}
+.polaroid-caption{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-family:var(--font-script);font-size:1.65rem;color:#3e2c32}
+.note{position:absolute;right:4px;bottom:35px;width:160px;padding:22px 15px;background:#f8eee2;box-shadow:var(--shadow-sm);transform:rotate(-7deg);font-family:var(--font-script);font-size:1.35rem;text-align:center;color:#6f4546}
+.note:after{content:"♡";display:block;color:var(--rose);font-size:1.5rem;margin-top:5px}
+.skyline{position:absolute;bottom:12px;left:0;width:100%;height:160px;opacity:.8}
+.skyline:before{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(transparent 0 20%,#45383e 21% 100%);clip-path:polygon(0 35%,6% 35%,6% 14%,10% 14%,10% 52%,16% 52%,16% 0,20% 0,20% 45%,26% 45%,26% 23%,30% 23%,30% 55%,37% 55%,37% 7%,42% 7%,42% 44%,48% 44%,48% 20%,53% 20%,53% 56%,60% 56%,60% 30%,66% 30%,66% 50%,72% 50%,72% 12%,76% 12%,76% 48%,83% 48%,83% 25%,88% 25%,88% 58%,94% 58%,94% 18%,100% 18%,100% 100%,0 100%)}
+.cta-wrap{margin-top:28px}.btn{cursor:pointer;border-radius:999px;padding:14px 22px;font-weight:700;transition:.25s ease;position:relative;overflow:hidden}.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary,.btn-yes,.btn-gold{color:#fff;background:linear-gradient(135deg,var(--rose),#c87867);box-shadow:0 12px 28px rgba(184,95,91,.22)}
+.btn-primary{padding:15px 28px}.btn-primary:hover,.btn-yes:hover,.btn-gold:hover{box-shadow:0 16px 32px rgba(184,95,91,.28)}
+/* QUESTION */
+.question-wrap{max-width:820px;margin:auto;text-align:center;padding:clamp(36px,6vw,70px) clamp(20px,5vw,70px);background:rgba(255,253,249,.84);border:1px solid var(--line);border-radius:38px;box-shadow:var(--shadow)}
+.question-wrap>span:first-child{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#f5e4d7;font-size:1.8rem!important}
+.q-text{font-size:clamp(1.05rem,2.2vw,1.3rem);line-height:1.7;color:#55464b;margin:0 auto 26px;max-width:620px}.q-text strong{color:var(--rose-dark)}
+.date-selector{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:24px 0}
+.date-opt{min-width:180px;padding:18px 24px;border:1px solid rgba(90,58,66,.14);border-radius:20px;background:#fff;cursor:pointer;transition:.25s ease;box-shadow:0 8px 20px rgba(64,43,48,.05)}
+.date-opt:hover{transform:translateY(-2px);border-color:rgba(184,95,91,.4)}.date-opt.active{background:#fbebe3;border-color:var(--rose);box-shadow:0 10px 25px rgba(184,95,91,.12)}
+.date-opt .day{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}.date-opt .date-num{display:block;margin-top:4px;font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--ink)}
+.countdown-timer{display:grid;grid-template-columns:repeat(4,1fr);max-width:600px;margin:24px auto 30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}.countdown-item{display:flex;flex-direction:column;align-items:center;border-right:1px solid var(--line)}.countdown-item:last-child{border-right:0}.countdown-item .num{font-family:var(--font-display);font-size:2.1rem;font-weight:700}.countdown-item .label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:-2px}
+.btn-group{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:8px}.btn-yes{min-width:300px}.btn-no-wrap{position:relative}.btn-no{background:#fff;color:var(--rose-dark);border:1px solid rgba(184,95,91,.38);min-width:130px}.btn-no:hover{background:#fff5f1}
+.no-escape-zigzag{animation:zigzag .35s ease}.no-escape-spin{animation:spin .45s ease}.no-escape-fly{animation:fly .5s ease}.no-escape-teleport{animation:teleport .35s ease}@keyframes zigzag{50%{transform:translateX(18px) rotate(-4deg)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes fly{50%{transform:translateY(-24px) rotate(7deg)}}@keyframes teleport{50%{opacity:.1;transform:scale(.7)}}
+/* CONFIRMATION */
+.confirmation-wrap{max-width:760px;margin:auto;text-align:center;padding:clamp(48px,8vw,88px) 28px;background:rgba(255,253,249,.88);border:1px solid var(--line);border-radius:38px;box-shadow:var(--shadow)}
+.big-emoji{display:inline-grid;place-items:center;width:86px;height:86px;border-radius:50%;background:#f5e4d7;font-size:2.5rem}.thank-you{font-size:clamp(3rem,7vw,5.5rem);line-height:.9;margin:20px 0 10px;color:var(--rose-dark)}.details{display:inline-block;margin:20px auto 28px;padding:12px 18px;border-radius:99px;background:#f8eee3;color:#6b575c;font-weight:600}.action-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.btn-copy{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn-close{background:transparent;color:var(--muted);border:1px solid transparent}.case-closed{margin-top:22px;color:var(--muted);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(42,27,32,.48);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s ease;z-index:80}.modal-overlay.open{opacity:1;pointer-events:auto}.modal{width:min(570px,100%);background:var(--paper);border-radius:30px;padding:34px;box-shadow:0 30px 90px rgba(35,22,27,.28);transform:translateY(14px);transition:.3s ease}.modal-overlay.open .modal{transform:none}.modal h2{font-size:2.2rem;margin:0 0 20px}.terms-list{padding-left:22px;color:#58484d;line-height:1.7}.terms-list li{margin-bottom:12px}.bonus-input{width:100%;margin-top:9px;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);outline:none}.bonus-input:focus{border-color:var(--rose);box-shadow:0 0 0 4px rgba(184,95,91,.09)}.btn-wrap{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.op-6{opacity:.6}
+.gift-box{position:fixed;inset:0;z-index:85;background:rgba(42,27,32,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}.gift-box.open{opacity:1;pointer-events:auto}.gift-inner{width:min(520px,100%);background:var(--paper);border-radius:30px;padding:42px;text-align:center;box-shadow:0 30px 90px rgba(35,22,27,.28)}.gift-icon{font-size:4rem;display:block;margin-bottom:8px}.gift-msg{line-height:1.8;color:var(--muted)}
+.coffee-cup,.music-toggle{position:fixed;z-index:20;bottom:22px;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,249,.88);border:1px solid var(--line);box-shadow:var(--shadow-sm);cursor:pointer;backdrop-filter:blur(8px)}.coffee-cup{right:22px;font-size:1.35rem}.music-toggle{left:22px;font-size:1rem}.steam{position:absolute;font-size:.6rem;opacity:.6;animation:steam 2s infinite}.steam:nth-child(2){left:12px}.steam:nth-child(3){left:22px;animation-delay:.5s}.steam:nth-child(4){left:31px;animation-delay:1s}
+@media(max-width:800px){.welcome-hero{padding:32px 24px;min-height:auto}.welcome-copy{width:100%;max-width:none}.heading-xl{font-size:clamp(3.2rem,14vw,5.2rem)}.hero-art{position:relative;right:auto;top:auto;width:100%;height:390px;margin-top:20px}.polaroid{right:50%;transform:translateX(50%) rotate(3deg);width:min(330px,78%)}.photo{height:270px}.note{right:0;bottom:12px;width:130px;font-size:1.1rem}.skyline{bottom:0}.countdown-timer{max-width:100%}}
+@media(max-width:520px){.app{width:min(100% - 18px,1120px);padding-top:14px}.progress-tracker{margin-bottom:12px}.progress-step{width:28px}.welcome-hero,.question-wrap,.confirmation-wrap{border-radius:26px}.badge{font-size:.58rem}.case-bubble{font-size:.84rem;padding:19px}.hero-art{height:330px}.polaroid{width:270px;padding:10px 10px 42px}.photo{height:220px}.cup{transform:translate(-50%,-50%) scale(.78)}.saucer{transform:translateX(-50%) scale(.78)}.polaroid-caption{font-size:1.35rem}.note{width:108px;padding:15px 10px;font-size:.95rem}.countdown-item .num{font-size:1.65rem}.btn-yes{min-width:0;width:100%}.btn-no{width:100%}.btn-no-wrap{width:100%}.modal,.gift-inner{padding:26px 20px}.coffee-cup,.music-toggle{bottom:12px}.coffee-cup{right:12px}.music-toggle{left:12px}}
+</style>
+</head>
+<body>
+
+    <!-- ===== BACKGROUND HEARTS ===== -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- ===== CONFETTI CANVAS ===== -->
+    <canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+
+    <!-- ===== ROSE CONTAINER ===== -->
+    <div id="roseContainer"></div>
+
+    <!-- ===== GIFT BOX MODAL ===== -->
+    <div class="gift-box" id="giftBox">
+        <div class="gift-inner">
+            <span class="gift-icon">🎁</span>
+            <h2 style="font-size:1.3rem; color:var(--color-primary);">Case Closed! 🕵️</h2>
+            <p class="gift-msg">
+                <span class="highlight">✨ Mission Accomplished, Daya!</span><br />
+                You've officially cracked the case.<br />
+                Coffee &amp; great conversations await! ☕💛
+            </p>
+            <button class="btn btn-gold" onclick="closeGift()">Case Dismissed! 🌹</button>
+        </div>
+    </div>
+
+    <!-- ===== TERMS MODAL ===== -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal">
+            <h2 class="font-display">🕵️‍♂️ Terms &amp; Conditions</h2>
+            <ul class="terms-list">
+                <li>You'll try the signature coffee and rate it honestly ☕</li>
+                <li>You admit this beats Mumbai's best vada pav 😉</li>
+                <li>You'll share one secret or fun fact about your Bangalore trip 🗺️</li>
+                <li>
+                    Bonus: Any other place you'd like to investigate? <span class="op-6">(Optional)</span> 🗺️
+                    <input class="bonus-input" id="bonusPlace" placeholder="e.g., Marine Drive after coffee?" />
+                </li>
+            </ul>
+            <div class="btn-wrap">
+                <button class="btn btn-gold" onclick="acceptTerms()">I Accept These Terms! ✨</button>
+                <button class="btn btn-close" onclick="closeModal()" style="background:transparent; box-shadow:none;">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN APP ===== -->
+    <main class="app" id="app">
+
+        <!-- ===== PROGRESS TRACKER ===== -->
+        <div class="progress-tracker">
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="0"></div>
+                <div class="progress-step" data-step="1"></div>
+                <div class="progress-step" data-step="2"></div>
+                <div class="progress-step" data-step="3"></div>
+            </div>
+            <div class="progress-label" id="stepLabel">Dossier <span id="stepPct">0%</span></div>
+        </div>
+
+        <!-- ============================================================
+        PHASE 1: WELCOME / CASE FILE
+        ============================================================ -->
+        <section class="phase active" id="phaseWelcome">
+            <div class="welcome-hero">
+                <div class="welcome-copy">
+                    <span class="badge">🕵️ Special Case — Assigned to Daya</span>
+                    <span class="emoji-big">📁</span>
+                    <h1 class="heading-xl font-display">
+                        Case File: <span class="highlight">Invitation</span>
+                    </h1>
+                    <div class="greeting-name font-display-light">
+                        Attention <span style="color:var(--rose-dark);font-weight:700;">Daya</span>! 🕵️‍♂️
+                    </div>
+                    <div class="greeting-sub">Shivani Dubey ji — this one's for you!</div>
+
+                    <article class="case-bubble">
+                        <p>I am officially inviting you on a <strong>special mission</strong> to escape the daily grind
+                        for some good food/coffee. We need a break from this <em>"prison" of routine</em>, and just like
+                        Andy Dufresne in <span class="quote">"Shawshank Redemption"</span>,
+                        I think it's time to <strong>"get busy living"</strong> instead of
+                        <em>"getting busy dying"</em> (in the office/wfh)!</p>
+                        <p style="font-weight:600;">So, here is the formal interrogation for you, Daya:</p>
+                    </article>
+
+                    <div class="cta-wrap">
+                        <button class="btn btn-primary" onclick="goToQuestion()">🔍 Open the Case File</button>
+                    </div>
+                    <p style="margin-top:14px;font-size:.7rem;opacity:.4;color:var(--muted);">(Spoiler: the case is all about saying YES!)</p>
+                </div>
+
+                <div class="hero-art" aria-hidden="true">
+                    <div class="glow"></div>
+                    <div class="polaroid">
+                        <div class="photo">
+                            <div class="steam-line one"></div><div class="steam-line two"></div><div class="steam-line three"></div>
+                            <div class="saucer"></div><div class="cup"></div>
+                        </div>
+                        <div class="polaroid-caption">Coffee Date ♡</div>
+                    </div>
+                    <div class="note">Same city.<br />New stories?</div>
+                    <div class="skyline"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        PHASE 2: QUESTION / INTERROGATION
+        ============================================================ -->
+        <section class="phase" id="phaseQuestion">
+            <div class="question-wrap">
+                <span style="font-size:2.4rem; display:block; margin-bottom:2px;">🕵️</span>
+                <h2 class="font-display heading-md">The Interrogation</h2>
+
+                <p class="q-text">
+                    Would you like to have a cup of coffee with me at <strong>Nandan Coffee</strong>? ☕
+                </p>
+
+                <!-- Date Selector -->
+                <div class="date-selector">
+                    <button class="date-opt active" data-date="saturday" onclick="selectDate('saturday')">
+                        <span class="day">Saturday</span>
+                        <span class="date-num" id="satDate">Sep 12</span>
+                    </button>
+                    <button class="date-opt" data-date="sunday" onclick="selectDate('sunday')">
+                        <span class="day">Sunday</span>
+                        <span class="date-num" id="sunDate">Sep 13</span>
+                    </button>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div class="countdown-timer" id="countdownDisplay">
+                    <div class="countdown-item"><span class="num" id="cdDays">--</span><span class="label">Days</span></div>
+                    <div class="countdown-item"><span class="num" id="cdHours">--</span><span class="label">Hours</span></div>
+                    <div class="countdown-item"><span class="num" id="cdMins">--</span><span class="label">Mins</span></div>
+                    <div class="countdown-item"><span class="num" id="cdSecs">--</span><span class="label">Secs</span></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="btn-group">
+                    <button class="btn btn-yes" id="btnYes" onclick="handleYes()">
+                        🕵️‍♀️ Yes, Daya says YES! 💖
+                    </button>
+                    <div class="btn-no-wrap">
+                        <button class="btn btn-no" id="btnNo" onclick="handleNoClick()">
+                            🚫 No 🙈
+                        </button>
+                    </div>
+                </div>
+                <p style="font-size:0.7rem; opacity:0.4; margin-top:10px; color:var(--color-text-muted);">
+                    (Go ahead, try clicking "No" — it's got a mind of its own!)
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        PHASE 4: CONFIRMATION
+        ============================================================ -->
+        <section class="phase" id="phaseConfirm">
+            <div class="confirmation-wrap">
+                <span class="big-emoji">📁</span>
+                <div class="thank-you font-display">Case Closed!</div>
+                <p style="font-size:1.05rem; color:var(--color-text-dark); margin-bottom:2px;">
+                    Mission Accomplished, <strong>Daya</strong>! 🌹
+                </p>
+                <div class="details" id="confirmDetails">
+                    <span id="confirmDay">Saturday</span> at <span>4:00 PM</span> &middot; <span>Nandan Coffee</span>
+                </div>
+
+                <div class="action-row">
+                    <button class="btn btn-gold" onclick="openGift()">Open Your Case File 🎁</button>
+                    <button class="btn btn-copy" onclick="copyDetails()">📋 Copy Details</button>
+                    <button class="btn btn-close" onclick="closeAll()">Close Case ✨</button>
+                </div>
+                <p class="case-closed">Powered by CID Friendship Squad 🕵️‍♂️</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FLOATING UI ELEMENTS ===== -->
+    <div class="coffee-cup" id="coffeeCup" onclick="stirCup()">
+        ☕
+        <span class="steam">💨</span>
+        <span class="steam">💨</span>
+        <span class="steam">💨</span>
+    </div>
+
+    <div class="music-toggle" id="musicToggle" onclick="toggleMusic()" title="Toggle music">
+        🔇
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT — UI/UX LOGIC
+    ============================================================ -->
+    <script>
+        // ============================================================
+        //  STATE MANAGEMENT
+        // ============================================================
+        const state = {
+            step: 'welcome', // welcome | question | terms | confirm
+            selectedDate: 'saturday',
+            dateMap: {
+                saturday: { label: 'Saturday', dateStr: 'Sep 12', day: 12, month: 8 },
+                sunday: { label: 'Sunday', dateStr: 'Sep 13', day: 13, month: 8 }
+            },
+            termsAccepted: false,
+            musicOn: false,
+            audioCtx: null,
+            oscNode: null,
+            gainNode: null,
+            musicInterval: null,
+            giftOpened: false,
+            confettiActive: false,
+        };
+
+        // ============================================================
+        //  DOM REFS
+        // ============================================================
+        const $ = id => document.getElementById(id);
+        const phases = {
+            welcome: $('phaseWelcome'),
+            question: $('phaseQuestion'),
+            confirm: $('phaseConfirm'),
+        };
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const stepLabel = $('stepLabel');
+        const stepPct = $('stepPct');
+        const btnNo = $('btnNo');
+        const termsModal = $('termsModal');
+        const giftBox = $('giftBox');
+        const confettiCanvas = $('confettiCanvas');
+        const ctx = confettiCanvas.getContext('2d');
+
+        // ============================================================
+        //  PROGRESS TRACKER
+        // ============================================================
+        const stepMap = {
+            welcome: { label: 'Dossier', pct: 0, index: 0 },
+            question: { label: 'Interrogation', pct: 33, index: 1 },
+            terms: { label: 'Terms', pct: 66, index: 2 },
+            confirm: { label: 'Mission Complete', pct: 100, index: 3 },
+        };
+
+        function updateProgress(step) {
+            const s = stepMap[step] || stepMap.welcome;
+            progressSteps.forEach((el, i) => {
+                el.classList.toggle('active', i <= s.index);
+            });
+            stepLabel.textContent = `${s.label} ${s.pct}%`;
+        }
+
+        // ============================================================
+        //  PHASE SWITCHING
+        // ============================================================
+        function showPhase(name) {
+            Object.keys(phases).forEach(key => {
+                phases[key].classList.toggle('active', key === name);
+            });
+            state.step = name;
+            updateProgress(name);
+
+            if (name === 'question') {
+                btnNo.style.transform = '';
+                btnNo.style.opacity = '1';
+                btnNo.style.pointerEvents = 'auto';
+                btnNo.disabled = false;
+                startCountdown();
+            }
+            if (name === 'confirm') {
+                startConfetti();
+                launchRose();
+                if (!state.giftOpened) {
+                    setTimeout(() => openGift(), 1200);
+                }
+                // Response was already sent to Pranav inside acceptTerms()
+                // (with an automatic mailto: fallback if the network call fails)
+            }
+            if (name === 'welcome') {
+                generateHearts();
+            }
+        }
+
+        // ============================================================
+        //  NAVIGATION
+        // ============================================================
+        function goToQuestion() {
+            showPhase('question');
+        }
+
+        function closeModal() {
+            termsModal.classList.remove('open');
+            showPhase('question');
+        }
+
+        // ============================================================
+        //  DATE SELECTION
+        // ============================================================
+        function selectDate(date) {
+            state.selectedDate = date;
+            document.querySelectorAll('.date-opt').forEach(el => {
+                el.classList.toggle('active', el.dataset.date === date);
+            });
+            updateDateDisplay();
+            updateCountdown();
+        }
+
+        function updateDateDisplay() {
+            const now = new Date();
+            let satTarget = new Date(now.getFullYear(), 8, 12);
+            let sunTarget = new Date(now.getFullYear(), 8, 13);
+            if (satTarget < now) satTarget.setFullYear(satTarget.getFullYear() + 1);
+            if (sunTarget < now) sunTarget.setFullYear(sunTarget.getFullYear() + 1);
+            const fmt = d => d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+            $('satDate').textContent = fmt(satTarget);
+            $('sunDate').textContent = fmt(sunTarget);
+            const target = state.selectedDate === 'saturday' ? satTarget : sunTarget;
+            const dayName = target.toLocaleDateString('en-IN', { weekday: 'long' });
+            $('confirmDay').textContent = dayName;
+        }
+
+        // ============================================================
+        //  COUNTDOWN TIMER
+        // ============================================================
+        let countdownInterval = null;
+
+        function getSelectedDateObj() {
+            const d = state.dateMap[state.selectedDate];
+            const now = new Date();
+            let target = new Date(now.getFullYear(), d.month, d.day, 16, 0, 0, 0);
+            if (target < now) target.setFullYear(target.getFullYear() + 1);
+            return target;
+        }
+
+        function updateCountdown() {
+            const target = getSelectedDateObj();
+            const now = new Date();
+            const diff = Math.max(0, target - now);
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            $('cdDays').textContent = String(days).padStart(2, '0');
+            $('cdHours').textContent = String(hours).padStart(2, '0');
+            $('cdMins').textContent = String(mins).padStart(2, '0');
+            $('cdSecs').textContent = String(secs).padStart(2, '0');
+        }
+
+        function startCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // ============================================================
+        //  YES BUTTON
+        // ============================================================
+        function handleYes() {
+            termsModal.classList.add('open');
+            state.step = 'terms';
+            updateProgress('terms');
+        }
+
+        // ============================================================
+        //  TERMS
+        // ============================================================
+        async function acceptTerms() {
+            const acceptBtn = document.querySelector('#termsModal .btn-gold');
+            const originalLabel = acceptBtn ? acceptBtn.textContent : '';
+            if (acceptBtn) {
+                acceptBtn.disabled = true;
+                acceptBtn.textContent = '📨 Filing the case...';
+            }
+
+            try {
+                await submitToFormspree();
+                showToast('📨 Case filed! Pranav has been notified.');
+            } catch (err) {
+                // Network hiccup or Formspree not configured yet — fall back to
+                // opening the visitor's own mail app so the response is never lost.
+                console.warn('Formspree submission failed, falling back to mailto:', err);
+                sendDetails();
+            } finally {
+                if (acceptBtn) {
+                    acceptBtn.disabled = false;
+                    acceptBtn.textContent = originalLabel;
+                }
+            }
+
+            termsModal.classList.remove('open');
+            state.termsAccepted = true;
+            showPhase('confirm');
+            updateDateDisplay();
+        }
+
+        // ============================================================
+        //  NO BUTTON — ESCAPE!
+        // ============================================================
+        let noEscapeActive = false;
+
+        function handleNoClick() {
+            if (btnNo.disabled || noEscapeActive) return;
+            showToast("🚨 Oops! That's not an option! 😜");
+            escapeNoButton();
+        }
+
+        function escapeNoButton() {
+            if (noEscapeActive) return;
+            noEscapeActive = true;
+            btnNo.disabled = true;
+            btnNo.style.pointerEvents = 'none';
+
+            const patterns = ['no-escape-zigzag', 'no-escape-teleport', 'no-escape-spin', 'no-escape-fly'];
+            const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+            btnNo.className = `btn btn-no ${pattern}`;
+
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const rect = btnNo.getBoundingClientRect();
+            const bw = rect.width;
+            const bh = rect.height;
+            const margin = 60;
+            const tx = Math.random() * (vw - bw - margin * 2) + margin;
+            const ty = Math.random() * (vh - bh - margin * 2) + margin;
+
+            setTimeout(() => {
+                btnNo.style.transition = 'all 0.3s ease';
+                btnNo.style.transform = `translate(${tx - rect.left}px, ${ty - rect.top}px)`;
+                btnNo.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                btnNo.className = 'btn btn-no';
+                btnNo.style.transition = 'all 0.3s ease';
+                btnNo.style.transform = '';
+                btnNo.style.opacity = '1';
+                btnNo.disabled = false;
+                btnNo.style.pointerEvents = 'auto';
+                noEscapeActive = false;
+
+                const newX = Math.random() * (vw - bw - 40) + 20;
+                const newY = Math.random() * (vh - bh - 40) + 20;
+                btnNo.style.position = 'fixed';
+                btnNo.style.left = newX + 'px';
+                btnNo.style.top = newY + 'px';
+                btnNo.style.transform = '';
+            }, 700);
+
+            setTimeout(() => {
+                if (noEscapeActive) {
+                    noEscapeActive = false;
+                    btnNo.className = 'btn btn-no';
+                    btnNo.disabled = false;
+                    btnNo.style.pointerEvents = 'auto';
+                    btnNo.style.transform = '';
+                    btnNo.style.opacity = '1';
+                }
+            }, 1200);
+        }
+
+        btnNo.addEventListener('mouseenter', function(e) {
+            if (btnNo.disabled || noEscapeActive) return;
+            escapeNoButton();
+        });
+        btnNo.addEventListener('touchstart', function(e) {
+            if (btnNo.disabled || noEscapeActive) return;
+            e.preventDefault();
+            escapeNoButton();
+            showToast("🚨 Oops! That's not an option! 😜");
+        });
+
+        // ============================================================
+        //  AUTO-EMAIL VIA FORMSPREE  (primary delivery method)
+        // ============================================================
+        // 1. Go to https://formspree.io and create a free account.
+        // 2. Create a new form pointed at pranavpatil342@gmail.com.
+        // 3. Copy the form endpoint it gives you (looks like
+        //    "https://formspree.io/f/abcdwxyz") and paste it below,
+        //    replacing 'YOUR_FORMSPREE_ID'.
+        // Works identically whether this page is hosted on GitHub Pages
+        // or on Netlify — no backend/server needed.
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mljeppgw';
+
+        async function submitToFormspree() {
+                        const date = state.selectedDate === 'saturday' ? 'Saturday, Sep 12' : 'Sunday, Sep 13';
+            const bonusInput = document.getElementById('bonusPlace');
+            const bonus = bonusInput ? bonusInput.value.trim() : '';
+            const finalBonus = bonus || 'Not specified (or Mumbai spot)';
+
+            const summary =
+                `Shivani Dubey ji (urf Daya) has responded to your invitation!\n\nSelected Date: ${date}\nBonus Investigation Idea: ${finalBonus}\n\nCase Status: Confirmed & Accepted ✅\n\nTime to prepare the coffee! 🕵️‍♂️☕`;
+
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: 'CID Case File Update: Invitation Response ☕',
+                    respondent: 'Shivani Dubey (urf Daya)',
+                    selected_date: date,
+                    bonus_investigation_idea: finalBonus,
+                    case_status: 'Confirmed & Accepted',
+                    message: summary
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Formspree responded with status ' + response.status);
+            }
+            return response;
+        }
+
+        // ============================================================
+        //  SEND DETAILS VIA EMAIL (mailto:) — automatic fallback only
+        // ============================================================
+        function sendDetails() {
+            const date = state.selectedDate === 'saturday' ? 'Saturday, Sep 12' : 'Sunday, Sep 13';
+            const bonusInput = document.getElementById('bonusPlace');
+            const bonus = bonusInput ? bonusInput.value.trim() : 'Not specified';
+            const finalBonus = bonus || 'Not specified (or Mumbai spot)';
+
+            const subject = 'CID Case File Update: Invitation Response';
+            const body =
+                `CID Case File Update\n\nShivani Dubey ji (urf Daya) has responded to your invitation!\n\nSelected Date: ${date}\nBonus Investigation Idea: ${finalBonus}\n\nCase Status: Confirmed & Accepted ✅\n\nTime to prepare the coffee! 🕵️‍♂️☕`;
+
+            const mailtoLink =
+                `mailto:pranavpatil342@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Open the default mail client
+            window.location.href = mailtoLink;
+
+            // Show a toast to confirm action
+            setTimeout(() => {
+                showToast('📧 Opening your mail client to send the case update...');
+            }, 300);
+        }
+
+        // ============================================================
+        //  COPY DETAILS TO CLIPBOARD
+        // ============================================================
+        function copyDetails() {
+            const date = state.selectedDate === 'saturday' ? 'Saturday, Sep 12' : 'Sunday, Sep 13';
+            const bonusInput = document.getElementById('bonusPlace');
+            const bonus = bonusInput ? bonusInput.value.trim() : 'Not specified';
+            const finalBonus = bonus || 'Not specified (or Mumbai spot)';
+
+            const text =
+                `CID Case File Update\n\nShivani Dubey ji (urf Daya) has responded to your invitation!\n\nSelected Date: ${date}\nBonus Investigation Idea: ${finalBonus}\n\nCase Status: Confirmed & Accepted ✅\n\nTime to prepare the coffee! 🕵️‍♂️☕`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('📋 Details copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('📋 Details copied to clipboard!');
+            });
+        }
+
+        // ============================================================
+        //  CONFETTI
+        // ============================================================
+        let confettiPieces = [];
+        let confettiAnimId = null;
+
+        function startConfetti() {
+            if (state.confettiActive) return;
+            state.confettiActive = true;
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            const colors = ['#F59E0B', '#E11D48', '#FFF8F0', '#10B981', '#0F172A'];
+            confettiPieces = [];
+            for (let i = 0; i < 180; i++) {
+                confettiPieces.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                    w: Math.random() * 10 + 4,
+                    h: Math.random() * 6 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: Math.random() * 3 + 2,
+                    rot: Math.random() * 360,
+                    rotSpeed: (Math.random() - 0.5) * 10,
+                    opacity: Math.random() * 0.7 + 0.3,
+                });
+            }
+            drawConfetti();
+        }
+
+        function drawConfetti() {
+            if (!state.confettiActive) return;
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            let alive = false;
+            confettiPieces.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.04;
+                p.rot += p.rotSpeed;
+                if (p.y < confettiCanvas.height + 20) alive = true;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rot * Math.PI) / 180);
+                ctx.globalAlpha = p.opacity;
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            });
+            if (alive) {
+                confettiAnimId = requestAnimationFrame(drawConfetti);
+            } else {
+                state.confettiActive = false;
+            }
+        }
+
+        function stopConfetti() {
+            state.confettiActive = false;
+            if (confettiAnimId) {
+                cancelAnimationFrame(confettiAnimId);
+                confettiAnimId = null;
+            }
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        }
+
+        // ============================================================
+        //  ROSE FLYING
+        // ============================================================
+        function launchRose() {
+            const container = $('roseContainer');
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const rose = document.createElement('div');
+                    rose.className = 'rose-fly';
+                    rose.textContent = '🌹';
+                    rose.style.left = (Math.random() * 60 + 10) + '%';
+                    rose.style.top = (85 + Math.random() * 10) + '%';
+                    rose.style.fontSize = (Math.random() * 2 + 2.8) + 'rem';
+                    rose.style.animationDuration = (Math.random() * 1.5 + 2.5) + 's';
+                    container.appendChild(rose);
+                    setTimeout(() => rose.remove(), 4000);
+                }, i * 400);
+            }
+        }
+
+        // ============================================================
+        //  GIFT BOX
+        // ============================================================
+        function openGift() {
+            if (state.giftOpened) {
+                giftBox.classList.add('open');
+                return;
+            }
+            state.giftOpened = true;
+            giftBox.classList.add('open');
+            setTimeout(() => {
+                startConfetti();
+                setTimeout(() => stopConfetti(), 2500);
+            }, 300);
+        }
+
+        function closeGift() {
+            giftBox.classList.remove('open');
+        }
+
+        // ============================================================
+        //  TOAST
+        // ============================================================
+        function showToast(msg) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2800);
+        }
+
+        // ============================================================
+        //  CLOSE ALL (Reset)
+        // ============================================================
+        function closeAll() {
+            stopConfetti();
+            if (countdownInterval) clearInterval(countdownInterval);
+            showPhase('welcome');
+            btnNo.style.position = '';
+            btnNo.style.left = '';
+            btnNo.style.top = '';
+            btnNo.style.transform = '';
+            btnNo.style.opacity = '1';
+            btnNo.disabled = false;
+            btnNo.style.pointerEvents = 'auto';
+            noEscapeActive = false;
+            state.giftOpened = false;
+            giftBox.classList.remove('open');
+            termsModal.classList.remove('open');
+        }
+
+        // ============================================================
+        //  COFFEE CUP
+        // ============================================================
+        let stirCount = 0;
+
+        function stirCup() {
+            const cup = $('coffeeCup');
+            stirCount++;
+            cup.style.transform = 'scale(1.2) rotate(-12deg)';
+            setTimeout(() => cup.style.transform = 'scale(1.1) rotate(8deg)', 150);
+            setTimeout(() => cup.style.transform = '', 400);
+            if (stirCount % 3 === 0) {
+                showToast('☕ Stirring up some CID magic...');
+                const steams = cup.querySelectorAll('.steam');
+                steams.forEach(s => {
+                    s.style.animation = 'none';
+                    setTimeout(() => s.style.animation = 'steamRise 1.2s ease-in-out infinite', 10);
+                });
+            }
+            if (stirCount === 5) {
+                showToast('🕵️ You\'re a coffee detective!');
+            }
+        }
+
+        // ============================================================
+        //  MUSIC
+        // ============================================================
+        function toggleMusic() {
+            const toggle = $('musicToggle');
+            if (state.musicOn) {
+                stopMusic();
+                toggle.textContent = '🔇';
+                toggle.classList.remove('playing');
+            } else {
+                startMusic();
+                toggle.textContent = '🎵';
+                toggle.classList.add('playing');
+            }
+        }
+
+        function startMusic() {
+            try {
+                if (!state.audioCtx) {
+                    state.audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                }
+                const ctx = state.audioCtx;
+                if (ctx.state === 'suspended') ctx.resume();
+                const gain = ctx.createGain();
+                gain.gain.value = 0.08;
+                gain.connect(ctx.destination);
+                const osc1 = ctx.createOscillator();
+                osc1.type = 'sine';
+                osc1.frequency.value = 220;
+                osc1.connect(gain);
+                const osc2 = ctx.createOscillator();
+                osc2.type = 'sine';
+                osc2.frequency.value = 330;
+                osc2.connect(gain);
+                const osc3 = ctx.createOscillator();
+                osc3.type = 'sine';
+                osc3.frequency.value = 440;
+                osc3.connect(gain);
+                osc1.detune.value = -4;
+                osc2.detune.value = 2;
+                osc3.detune.value = 6;
+                osc1.start();
+                osc2.start();
+                osc3.start();
+                state.oscNode = [osc1, osc2, osc3];
+                state.gainNode = gain;
+                state.musicOn = true;
+                let t = 0;
+                if (state.musicInterval) clearInterval(state.musicInterval);
+                state.musicInterval = setInterval(() => {
+                    t += 0.02;
+                    if (state.gainNode) {
+                        state.gainNode.gain.value = 0.06 + 0.025 * Math.sin(t * 1.3);
+                    }
+                }, 50);
+            } catch (e) {
+                showToast('🎵 Music not available, but the vibe is still here!');
+            }
+        }
+
+        function stopMusic() {
+            state.musicOn = false;
+            if (state.musicInterval) {
+                clearInterval(state.musicInterval);
+                state.musicInterval = null;
+            }
+            if (state.gainNode) {
+                state.gainNode.gain.value = 0;
+                state.gainNode.disconnect();
+                state.gainNode = null;
+            }
+            if (state.oscNode) {
+                state.oscNode.forEach(o => { try { o.stop();
+                        o.disconnect(); } catch (e) {} });
+                state.oscNode = null;
+            }
+            if (state.audioCtx) {
+                try { state.audioCtx.suspend(); } catch (e) {}
+            }
+        }
+
+        // ============================================================
+        //  HEARTS BACKGROUND
+        // ============================================================
+        function generateHearts() {
+            const container = $('heartsBg');
+            container.innerHTML = '';
+            const symbols = ['♥', '♡', '❤', '💕', '💗', '💖'];
+            for (let i = 0; i < 30; i++) {
+                const el = document.createElement('div');
+                el.className = 'heart';
+                el.textContent = symbols[i % symbols.length];
+                el.style.left = Math.random() * 100 + '%';
+                el.style.fontSize = (Math.random() * 1.2 + 0.6) + 'rem';
+                el.style.animationDuration = (Math.random() * 20 + 14) + 's';
+                el.style.animationDelay = (Math.random() * 18) + 's';
+                el.style.opacity = Math.random() * 0.15 + 0.05;
+                container.appendChild(el);
+            }
+        }
+
+        // ============================================================
+        //  WINDOW RESIZE HANDLER
+        // ============================================================
+        window.addEventListener('resize', () => {
+            if (state.confettiActive) {
+                confettiCanvas.width = window.innerWidth;
+                confettiCanvas.height = window.innerHeight;
+            }
+        });
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        function init() {
+            generateHearts();
+            updateDateDisplay();
+            updateProgress('welcome');
+            selectDate('saturday');
+
+            document.addEventListener('click', () => {
+                if (!state.audioCtx) {
+                    try {
+                        state.audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                    } catch (e) {}
+                }
+            }, { once: true });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (giftBox.classList.contains('open')) closeGift();
+                    if (termsModal.classList.contains('open')) {
+                        termsModal.classList.remove('open');
+                        showPhase('question');
+                    }
+                }
+            });
+
+            console.log('📁 Case File: Invitation is ready!');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // ============================================================
+        //  GLOBAL EXPOSURE
+        // ============================================================
+        window.goToQuestion = goToQuestion;
+        window.selectDate = selectDate;
+        window.handleYes = handleYes;
+        window.handleNoClick = handleNoClick;
+        window.acceptTerms = acceptTerms;
+        window.closeModal = closeModal;
+        window.openGift = openGift;
+        window.closeGift = closeGift;
+        window.closeAll = closeAll;
+        window.stirCup = stirCup;
+        window.toggleMusic = toggleMusic;
+        window.escapeNoButton = escapeNoButton;
+        window.showToast = showToast;
+        window.launchRose = launchRose;
+        window.sendDetails = sendDetails;
+        window.copyDetails = copyDetails;
+    </script>
+
+</body>
+</html>
